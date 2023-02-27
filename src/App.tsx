@@ -21,7 +21,7 @@ export default function App() {
 
   return (
     <div className="App">
-      <span className="heading">Taskify</span>
+      <span className="heading">Task List</span>
       <InputField task={task} setTask={setTask} addTask={addTask} />
       <TaskList tasks={tasks} setTasks={setTasks} />
     </div>

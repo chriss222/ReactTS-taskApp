@@ -41,7 +41,7 @@ const Task = ({ task, key, tasks, setTasks }: Props) => {
       ) : (
         <span className="task-text">{task.task}</span>
       )}
-      <div>
+      <div className="icons">
         <span className="icon" onClick={() => edit(task.id)}>
           <AiTwotoneEdit />
         </span>

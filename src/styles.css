@@ -13,6 +13,11 @@
   background-color: gold;
 }
 
+.heading {
+  font-size: 50px;
+  margin: 2rem;
+}
+
 .input {
   display: flex;
   width: 90%;
@@ -28,6 +33,7 @@
   border: none;
   transition: 0.2s;
   box-shadow: inset 0 0 5px burlywood;
+  background-color: rgb(212, 206, 147);
 }
 
 .task-input:focus {
@@ -48,13 +54,23 @@
   color: rgb(22, 15, 2);
 }
 
+.tasks {
+  min-width: 90%;
+  margin-top: 2rem;
+}
+
 .task {
   display: flex;
-  width: 30%;
+  flex: 1;
   border-radius: 5px;
   padding: 20px;
   margin-top: 15px;
-  background-color: yellowgreen;
+  background-color: burlywood;
+}
+
+.icons {
+  font-size: 1.5rem;
+  cursor: pointer;
 }
 
 .task-text {
