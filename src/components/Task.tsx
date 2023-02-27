@@ -6,15 +6,17 @@ import {
   AiTwotoneDelete,
   AiOutlineFileDone
 } from "react-icons/ai";
+import { Actions } from "../App";
 
 interface Props {
   task: TaskModel;
   tasks: TaskModel[];
   setTasks: React.Dispatch<React.SetStateAction<TaskModel[]>>;
   key: number;
+  dispatch: React.Dispatch<Actions>;
 }
 
-const Task = ({ task, key, tasks, setTasks }: Props) => {
+const Task = ({ task, key, tasks, setTasks, dispatch }: Props) => {
   const [editMode, setEditMode] = useState<boolean>(false);
   const [editTask, setEditTask] = useState<string>(task.task);
   const inputRef = useRef<HTMLInputElement>(null);
@@ -23,17 +25,17 @@ const Task = ({ task, key, tasks, setTasks }: Props) => {
     inputRef.current?.focus();
   }, [editMode]);
 
-  const remove = (id: number) => {
-    setTasks(tasks.filter((task) => task.id !== id));
-  };
+  // const remove = (id: number) => {
+  //   setTasks(tasks.filter((task) => task.id !== id));
+  // };
 
-  const done = (id: number) => {
-    setTasks(
-      tasks.map((task) =>
-        task.id === id ? { ...task, isDone: !task.isDone } : task
-      )
-    );
-  };
+  // const done = (id: number) => {
+  //   setTasks(
+  //     tasks.map((task) =>
+  //       task.id === id ? { ...task, isDone: !task.isDone } : task
+  //     )
+  //   );
+  // };
 
   const edit = (e: React.FormEvent, id: number) => {
     e.preventDefault();
@@ -69,10 +71,16 @@ const Task = ({ task, key, tasks, setTasks }: Props) => {
         >
           <AiTwotoneEdit />
         </span>
-        <span className="icon" onClick={() => remove(task.id)}>
+        <span
+          className="icon"
+          onClick={() => dispatch({ type: "remove", payload: task.id })}
+        >
           <AiTwotoneDelete />
         </span>
-        <span className="icon" onClick={() => done(task.id)}>
+        <span
+          className="icon"
+          onClick={() => dispatch({ type: "done", payload: task.id })}
+        >
           <AiOutlineFileDone />
         </span>
       </div>

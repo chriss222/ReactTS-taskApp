@@ -4,6 +4,10 @@
   font-family: "Courier New", Courier, monospace;
 }
 
+body {
+  background-color: gold;
+}
+
 .App {
   width: 100vw;
   height: 100vh;

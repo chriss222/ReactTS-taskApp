@@ -1,4 +1,4 @@
-import React, { SyntheticEvent, useState, useReducer, useContext } from "react";
+import React, { SyntheticEvent, useState, useReducer } from "react";
 import "./styles.css";
 import InputField from "./components/InputField";
 import Task from "./model";
@@ -21,7 +21,7 @@ const TaskReducer = (state: TaskModel[], action: Actions) => {
       return state.filter((task) => task.id !== action.payload);
     case "done":
       return state.map((task) =>
-        task.id !== action.payload ? { ...task, isDone: !task.isDone } : task
+        task.id === action.payload ? { ...task, isDone: !task.isDone } : task
       );
     default:
       return state;
@@ -48,7 +48,7 @@ export default function App() {
     <div className="App">
       <span className="heading">Task List</span>
       <InputField task={task} setTask={setTask} dispatch={dispatch} />
-      <TaskList tasks={state} setTasks={setTasks} />
+      <TaskList tasks={state} setTasks={setTasks} dispatch={dispatch} />
     </div>
   );
 }
