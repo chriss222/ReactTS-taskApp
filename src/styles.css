@@ -1,0 +1,65 @@
+* {
+  padding: 0;
+  margin: 0;
+  font-family: "Courier New", Courier, monospace;
+}
+
+.App {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: gold;
+}
+
+.input {
+  display: flex;
+  width: 90%;
+  position: relative;
+  align-items: center;
+}
+
+.task-input {
+  width: 100%;
+  border-radius: 50px;
+  padding: 20px 30px;
+  font-size: 25px;
+  border: none;
+  transition: 0.2s;
+  box-shadow: inset 0 0 5px burlywood;
+}
+
+.task-input:focus {
+  box-shadow: 0 0 10px 1000px rgba(22, 22, 22, 0.753);
+  outline: none;
+}
+
+.submit {
+  position: absolute;
+  width: 50px;
+  height: 50px;
+  margin: 12px;
+  border-radius: 50px;
+  right: 0px;
+  font-size: 10px;
+  border: none;
+  background-color: burlywood;
+  color: rgb(22, 15, 2);
+}
+
+.task {
+  display: flex;
+  width: 30%;
+  border-radius: 5px;
+  padding: 20px;
+  margin-top: 15px;
+  background-color: yellowgreen;
+}
+
+.task-text {
+  flex: 1;
+  padding: 5px;
+  border: none;
+  font-size: 20px;
+}
