@@ -54,6 +54,14 @@
   color: rgb(22, 15, 2);
 }
 
+.submit:hover {
+  font-size: 12px;
+  widows: 60px;
+  height: 58px;
+  border-radius: 65px;
+  box-shadow: 2px -1px rgb(44, 32, 32);
+}
+
 .tasks {
   min-width: 90%;
   margin-top: 2rem;
