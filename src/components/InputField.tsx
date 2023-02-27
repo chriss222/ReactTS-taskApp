@@ -1,20 +1,24 @@
 import React, { useRef } from "react";
 import "../styles.css";
+import { Actions } from "../App";
 
 interface Props {
   task: string;
   setTask: React.Dispatch<React.SetStateAction<string>>;
-  addTask: (e: React.SyntheticEvent) => void;
+  dispatch: React.Dispatch<Actions>;
 }
 
-const InputField = ({ task, setTask, addTask }: Props) => {
+const InputField = ({ task, setTask, dispatch }: Props) => {
   const inputRef = useRef<HTMLInputElement>(null);
+
+  // console.log(task);
 
   return (
     <form
       className="input"
       onSubmit={(e) => {
-        addTask(e);
+        e.preventDefault();
+        dispatch({ type: "add", payload: task });
         inputRef.current?.blur();
       }}
     >

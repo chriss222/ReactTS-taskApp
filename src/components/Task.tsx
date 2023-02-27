@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import TaskModel from "../model";
 import "../styles.css";
 import {
@@ -16,11 +16,12 @@ interface Props {
 
 const Task = ({ task, key, tasks, setTasks }: Props) => {
   const [editMode, setEditMode] = useState<boolean>(false);
+  const [editTask, setEditTask] = useState<string>(task.task);
+  const inputRef = useRef<HTMLInputElement>(null);
 
-  const edit = (id: number) => {
-    console.log(task);
-    return null;
-  };
+  useEffect(() => {
+    inputRef.current?.focus();
+  }, [editMode]);
 
   const remove = (id: number) => {
     setTasks(tasks.filter((task) => task.id !== id));
@@ -34,15 +35,38 @@ const Task = ({ task, key, tasks, setTasks }: Props) => {
     );
   };
 
+  const edit = (e: React.FormEvent, id: number) => {
+    e.preventDefault();
+
+    setTasks(
+      tasks.map((task) => (task.id === id ? { ...task, task: editTask } : task))
+    );
+    setEditMode(false);
+  };
+
   return (
-    <form className="task">
-      {task.isDone ? (
-        <s className="task-text">{task.task}</s>
-      ) : (
+    <form className="task" onSubmit={(e) => edit(e, task.id)}>
+      {editMode && (
+        <input
+          ref={inputRef}
+          className="task-edit-text"
+          value={editTask}
+          onChange={(e) => setEditTask(e.target.value)}
+        />
+      )}
+      {task.isDone && !editMode && <s className="task-text">{task.task}</s>}
+      {!task.isDone && !editMode && (
         <span className="task-text">{task.task}</span>
       )}
       <div className="icons">
-        <span className="icon" onClick={() => edit(task.id)}>
+        <span
+          className="icon"
+          onClick={() => {
+            if (!task.isDone) {
+              setEditMode(!editMode);
+            }
+          }}
+        >
           <AiTwotoneEdit />
         </span>
         <span className="icon" onClick={() => remove(task.id)}>
