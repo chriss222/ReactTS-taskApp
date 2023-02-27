@@ -4,6 +4,10 @@
   font-family: "Courier New", Courier, monospace;
 }
 
+body {
+  background-color: gold;
+}
+
 .App {
   width: 100vw;
   height: 100vh;
@@ -74,6 +78,7 @@
   padding: 20px;
   margin-top: 15px;
   background-color: burlywood;
+  justify-content: space-between;
 }
 
 .icons {
@@ -86,4 +91,13 @@
   padding: 5px;
   border: none;
   font-size: 20px;
+}
+
+.task-edit-text {
+  padding: 5px;
+  border: none;
+  font-size: 20px;
+  background-color: rgb(230, 221, 208);
+  border-radius: 10px;
+  outline: none;
 }
