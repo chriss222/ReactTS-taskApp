@@ -39,9 +39,6 @@ const Task = ({ task, key, state, setTasks, dispatch }: Props) => {
 
   const edit = (e: React.FormEvent, id: number) => {
     e.preventDefault();
-    setTasks(
-      state.map((task) => (task.id === id ? { ...task, task: editTask } : task))
-    );
     dispatch({ type: "edit", payload: { id: task.id, task: editTask } });
     setEditMode(false);
   };
