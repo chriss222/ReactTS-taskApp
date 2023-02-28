@@ -11,25 +11,26 @@ export type Actions =
   | { type: "done"; payload: number }
   | { type: "edit"; payload: { id: number; task: string } };
 
-const TaskReducer = (state: TaskModel[], action: Actions) => {
+export type initialStateType = {
+  inputTask: string;
+  taskList: TaskModel[];
+};
+
+const initialState: initialStateType = {
+  inputTask: "",
+  taskList: []
+};
+
+const TaskReducer = (state: initialStateType, action: Actions) => {
   switch (action.type) {
     case "add":
-      return [
+      return {
         ...state,
-        { id: Date.now(), task: action.payload, isDone: false }
-      ];
-    case "remove":
-      return state.filter((task) => task.id !== action.payload);
-    case "done":
-      return state.map((task) =>
-        task.id === action.payload ? { ...task, isDone: !task.isDone } : task
-      );
-    case "edit":
-      return state.map((task) =>
-        task.id === action.payload.id
-          ? { ...task, task: action.payload.task }
-          : task
-      );
+        taskList: [
+          ...state.taskList,
+          { id: Date.now(), task: action.payload, isDone: false }
+        ]
+      };
     default:
       return state;
   }
@@ -38,7 +39,7 @@ const TaskReducer = (state: TaskModel[], action: Actions) => {
 export default function App() {
   const [task, setTask] = useState<string>("");
   const [tasks, setTasks] = useState<Task[]>([]);
-  const [state, dispatch] = useReducer(TaskReducer, []);
+  const [state, dispatch] = useReducer(TaskReducer, initialState);
 
   // const addTask = (e: React.SyntheticEvent) => {
   //   e.preventDefault();
@@ -48,11 +49,17 @@ export default function App() {
   //     setTask("");
   //   }
   // };
+  console.log(state);
 
   return (
     <div className="App">
       <span className="heading">Task List</span>
-      <InputField task={task} setTask={setTask} dispatch={dispatch} />
+      <InputField
+        state={state}
+        task={task}
+        setTask={setTask}
+        dispatch={dispatch}
+      />
       <TaskList state={state} setTasks={setTasks} dispatch={dispatch} />
     </div>
   );

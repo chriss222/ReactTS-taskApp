@@ -1,17 +1,17 @@
 import React, { useRef } from "react";
 import "../styles.css";
 import { Actions } from "../App";
+import TaskModel from "../model";
 
 interface Props {
   task: string;
   setTask: React.Dispatch<React.SetStateAction<string>>;
   dispatch: React.Dispatch<Actions>;
+  state: TaskModel[];
 }
 
-const InputField = ({ task, setTask, dispatch }: Props) => {
+const InputField = ({ task, setTask, dispatch, state }: Props) => {
   const inputRef = useRef<HTMLInputElement>(null);
-
-  // console.log(task);
 
   return (
     <form

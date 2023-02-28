@@ -7,10 +7,11 @@ import {
   AiOutlineFileDone
 } from "react-icons/ai";
 import { Actions } from "../App";
+import { initialStateType } from "../App";
 
 interface Props {
   task: TaskModel;
-  state: TaskModel[];
+  state: initialStateType;
   setTasks: React.Dispatch<React.SetStateAction<TaskModel[]>>;
   key: number;
   dispatch: React.Dispatch<Actions>;
