@@ -12,12 +12,12 @@ import { initialStateType } from "../App";
 interface Props {
   task: TaskModel;
   state: initialStateType;
-  setTasks: React.Dispatch<React.SetStateAction<TaskModel[]>>;
+  // setTasks: React.Dispatch<React.SetStateAction<TaskModel[]>>;
   key: number;
   dispatch: React.Dispatch<Actions>;
 }
 
-const Task = ({ task, key, state, setTasks, dispatch }: Props) => {
+const Task = ({ task, key, state, dispatch }: Props) => {
   const [editMode, setEditMode] = useState<boolean>(false);
   const [editTask, setEditTask] = useState<string>(task.task);
   const inputRef = useRef<HTMLInputElement>(null);

@@ -6,12 +6,12 @@ import { Actions } from "../App";
 import { initialStateType } from "../App";
 
 interface Props {
-  setTasks: React.Dispatch<React.SetStateAction<TaskModel[]>>;
+  // setTasks: React.Dispatch<React.SetStateAction<TaskModel[]>>;
   dispatch: React.Dispatch<Actions>;
   state: initialStateType;
 }
 
-const TaskList = ({ setTasks, dispatch, state }: Props) => {
+const TaskList = ({ dispatch, state }: Props) => {
   return (
     <div className="tasks">
       {state.taskList.map((task) => {
@@ -20,7 +20,7 @@ const TaskList = ({ setTasks, dispatch, state }: Props) => {
             task={task}
             key={task.id}
             state={state}
-            setTasks={setTasks}
+            // setTasks={setTasks}
             dispatch={dispatch}
           />
         );

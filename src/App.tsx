@@ -6,6 +6,7 @@ import TaskList from "./components/TaskList";
 import TaskModel from "./model";
 
 export type Actions =
+  | { type: "enterTask"; payload: string }
   | { type: "add"; payload: string }
   | { type: "remove"; payload: number }
   | { type: "done"; payload: number }
@@ -23,13 +24,36 @@ const initialState: initialStateType = {
 
 const TaskReducer = (state: initialStateType, action: Actions) => {
   switch (action.type) {
-    case "add":
+    case "enterTask":
       return {
         ...state,
+        inputTask: action.payload
+      };
+    case "add":
+      return {
+        inputTask: "",
         taskList: [
           ...state.taskList,
           { id: Date.now(), task: action.payload, isDone: false }
         ]
+      };
+    case "remove":
+      return {
+        taskList: state.taskList.filter((task) => task.id !== action.payload)
+      };
+    case "done":
+      return {
+        taskList: state.taskList.map((task) =>
+          task.id === action.payload ? { ...task, isDone: !task.isDone } : task
+        )
+      };
+    case "edit":
+      return {
+        taskList: state.taskList.map((task) =>
+          task.id === action.payload.id
+            ? { ...task, task: action.payload.task }
+            : task
+        )
       };
     default:
       return state;
@@ -37,8 +61,8 @@ const TaskReducer = (state: initialStateType, action: Actions) => {
 };
 
 export default function App() {
-  const [task, setTask] = useState<string>("");
-  const [tasks, setTasks] = useState<Task[]>([]);
+  // const [task, setTask] = useState<string>("");
+  // const [tasks, setTasks] = useState<Task[]>([]);
   const [state, dispatch] = useReducer(TaskReducer, initialState);
 
   // const addTask = (e: React.SyntheticEvent) => {
@@ -56,11 +80,15 @@ export default function App() {
       <span className="heading">Task List</span>
       <InputField
         state={state}
-        task={task}
-        setTask={setTask}
+        // task={task}
+        // setTask={setTask}
         dispatch={dispatch}
       />
-      <TaskList state={state} setTasks={setTasks} dispatch={dispatch} />
+      <TaskList
+        state={state}
+        // setTasks={setTasks}
+        dispatch={dispatch}
+      />
     </div>
   );
 }
