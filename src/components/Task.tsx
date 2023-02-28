@@ -10,13 +10,13 @@ import { Actions } from "../App";
 
 interface Props {
   task: TaskModel;
-  tasks: TaskModel[];
+  state: TaskModel[];
   setTasks: React.Dispatch<React.SetStateAction<TaskModel[]>>;
   key: number;
   dispatch: React.Dispatch<Actions>;
 }
 
-const Task = ({ task, key, tasks, setTasks, dispatch }: Props) => {
+const Task = ({ task, key, state, setTasks, dispatch }: Props) => {
   const [editMode, setEditMode] = useState<boolean>(false);
   const [editTask, setEditTask] = useState<string>(task.task);
   const inputRef = useRef<HTMLInputElement>(null);
@@ -39,10 +39,10 @@ const Task = ({ task, key, tasks, setTasks, dispatch }: Props) => {
 
   const edit = (e: React.FormEvent, id: number) => {
     e.preventDefault();
-
     setTasks(
-      tasks.map((task) => (task.id === id ? { ...task, task: editTask } : task))
+      state.map((task) => (task.id === id ? { ...task, task: editTask } : task))
     );
+    dispatch({ type: "edit", payload: { id: task.id, task: editTask } });
     setEditMode(false);
   };
 

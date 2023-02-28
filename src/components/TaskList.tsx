@@ -5,20 +5,20 @@ import Task from "./Task";
 import { Actions } from "../App";
 
 interface Props {
-  tasks: TaskModel[];
   setTasks: React.Dispatch<React.SetStateAction<TaskModel[]>>;
   dispatch: React.Dispatch<Actions>;
+  state: TaskModel[];
 }
 
-const TaskList = ({ tasks, setTasks, dispatch }: Props) => {
+const TaskList = ({ setTasks, dispatch, state }: Props) => {
   return (
     <div className="tasks">
-      {tasks.map((task) => {
+      {state.map((task) => {
         return (
           <Task
             task={task}
             key={task.id}
-            tasks={tasks}
+            state={state}
             setTasks={setTasks}
             dispatch={dispatch}
           />

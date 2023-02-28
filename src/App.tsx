@@ -8,7 +8,8 @@ import TaskModel from "./model";
 export type Actions =
   | { type: "add"; payload: string }
   | { type: "remove"; payload: number }
-  | { type: "done"; payload: number };
+  | { type: "done"; payload: number }
+  | { type: "edit"; payload: { id: number; task: string } };
 
 const TaskReducer = (state: TaskModel[], action: Actions) => {
   switch (action.type) {
@@ -23,6 +24,12 @@ const TaskReducer = (state: TaskModel[], action: Actions) => {
       return state.map((task) =>
         task.id === action.payload ? { ...task, isDone: !task.isDone } : task
       );
+    case "edit":
+      return state.map((task) =>
+        task.id === action.payload.id
+          ? { ...task, task: action.payload.task }
+          : task
+      );
     default:
       return state;
   }
@@ -32,8 +39,6 @@ export default function App() {
   const [task, setTask] = useState<string>("");
   const [tasks, setTasks] = useState<Task[]>([]);
   const [state, dispatch] = useReducer(TaskReducer, []);
-
-  console.log(state);
 
   // const addTask = (e: React.SyntheticEvent) => {
   //   e.preventDefault();
@@ -48,7 +53,7 @@ export default function App() {
     <div className="App">
       <span className="heading">Task List</span>
       <InputField task={task} setTask={setTask} dispatch={dispatch} />
-      <TaskList tasks={state} setTasks={setTasks} dispatch={dispatch} />
+      <TaskList state={state} setTasks={setTasks} dispatch={dispatch} />
     </div>
   );
 }

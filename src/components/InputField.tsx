@@ -20,6 +20,7 @@ const InputField = ({ task, setTask, dispatch }: Props) => {
         e.preventDefault();
         dispatch({ type: "add", payload: task });
         inputRef.current?.blur();
+        setTask("");
       }}
     >
       <input
