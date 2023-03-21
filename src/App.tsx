@@ -22,7 +22,10 @@ const initialState: initialStateType = {
   taskList: []
 };
 
-const TaskReducer = (state: initialStateType, action: Actions) => {
+const TaskReducer = (
+  state: initialStateType,
+  action: Actions
+): initialStateType => {
   switch (action.type) {
     case "enterTask":
       return {
@@ -39,16 +42,19 @@ const TaskReducer = (state: initialStateType, action: Actions) => {
       };
     case "remove":
       return {
+        inputTask: "",
         taskList: state.taskList.filter((task) => task.id !== action.payload)
       };
     case "done":
       return {
+        inputTask: "",
         taskList: state.taskList.map((task) =>
           task.id === action.payload ? { ...task, isDone: !task.isDone } : task
         )
       };
     case "edit":
       return {
+        inputTask: "",
         taskList: state.taskList.map((task) =>
           task.id === action.payload.id
             ? { ...task, task: action.payload.task }
